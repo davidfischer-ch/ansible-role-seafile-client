@@ -1,0 +1,25 @@
+---
+
+- block:
+    # Old way of managing keys
+    - name: Register Seafile client apt key
+      apt_key:
+        url: '{{ seafile_client_apt_key }}'
+        state: present
+
+    # New way of managing keys
+    - name: Copy Seafile client apt key
+      get_url:
+        url: '{{ seafile_client_apt_key }}'
+        dest: /usr/share/keyrings/seafile-keyring.asc
+        checksum: '{{ seafile_client_apt_key_checksum }}'
+      environment: '{{ seafile_client_download_environment }}'
+
+    - name: Install Seafile client apt repository
+      apt_repository:
+        repo: '{{ seafile_client_apt_repository }}'
+        filename: ansible_roles_seafile_client
+        state: present
+        update_cache: yes
+  become: '{{ do_become }}'
+  tags: [seafile-client, packages]  # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882

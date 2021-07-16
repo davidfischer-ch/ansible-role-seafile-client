@@ -1,17 +1,11 @@
 ---
 
 - block:
-    - name: Install Seafile client apt repository
-      apt_repository:
-        repo: ppa:seafile/seafile-client
-        filename: ansible_roles_seafile_client
-        state: present
-        update_cache: yes
-      when: ansible_pkg_mgr == 'apt'
+    - include_tasks: setup-repository-{{ ansible_pkg_mgr }}.yml
 
     - name: Install Seafile client package
       package:
-        name: seafile-gui
+        name: '{{ seafile_client_packages }}'
         state: present
-  become: yes
+  become: '{{ do_become }}'
   tags: [seafile-client, packages]

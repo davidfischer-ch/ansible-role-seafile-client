@@ -3,20 +3,20 @@
 - block:
     # Old way of managing keys
     - name: Register Seafile client apt key
-      apt_key:
+      ansible.builtin.apt_key:
         url: '{{ seafile_client_apt_key }}'
         state: present
 
     # New way of managing keys
     - name: Copy Seafile client apt key
-      get_url:
+      ansible.builtin.get_url:
         url: '{{ seafile_client_apt_key }}'
         dest: /usr/share/keyrings/seafile-keyring.asc
         checksum: '{{ seafile_client_apt_key_checksum }}'
       environment: '{{ seafile_client_download_environment }}'
 
     - name: Install Seafile client apt repository
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: '{{ seafile_client_apt_repository }}'
         filename: ansible_roles_seafile_client
         state: present

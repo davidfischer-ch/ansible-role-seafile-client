@@ -4,7 +4,7 @@
     - include_tasks: setup-repository-{{ ansible_pkg_mgr }}.yml
 
     - name: Install Seafile client package
-      package:
+      ansible.builtin.package:
         name: '{{ seafile_client_packages }}'
         state: present
   become: '{{ do_become }}'

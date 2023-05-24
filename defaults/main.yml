@@ -2,7 +2,7 @@ do_become: yes
 
 seafile_client_download_environment: {}
 seafile_client_apt_key: https://linux-clients.seafile.com/seafile.asc
-seafile_client_apt_key_checksum: sha256:08c16b1c9719f8247fd16fff2a2552f128c3dac86e45c62617cc7aae4faa0e92
+seafile_client_apt_key_checksum: sha256:71235295bc8756a37ebb0692c5be6cbfc2952765de0472c8b861d999547307a3
 seafile_client_apt_repository: deb [arch=amd64 signed-by=/usr/share/keyrings/seafile-keyring.asc] https://linux-clients.seafile.com/seafile-deb/{{ ansible_distribution_release }}/ stable main
 
 seafile_client_packages:
